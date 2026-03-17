@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App - Static</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="search-bar">
+          <input type="text" placeholder="Search city..." disabled />
+          <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.5" y1="16.5" x2="22" y2="22" />
+          </svg>
+        </div>
+
+        <div class="current-info">
+          <div class="city-name"><b>City of Baybay</b></div>
+
+          <div class="main-icon">
+            <!-- Sun icon -->
+            <svg
+              viewBox="0 0 80 80"
+              fill="none"
+              stroke="#b0b8d0"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            >
+              <circle cx="40" cy="40" r="14" />
+              <line x1="40" y1="6" x2="40" y2="14" />
+              <line x1="40" y1="66" x2="40" y2="74" />
+              <line x1="6" y1="40" x2="14" y2="40" />
+              <line x1="66" y1="40" x2="74" y2="40" />
+              <line x1="17" y1="17" x2="23" y2="23" />
+              <line x1="57" y1="57" x2="63" y2="63" />
+              <line x1="63" y1="17" x2="57" y2="23" />
+              <line x1="23" y1="57" x2="17" y2="63" />
+            </svg>
+          </div>
+
+          <div class="temp-row">
+            <span class="temp-val">22</span>
+            <span class="temp-unit">°C</span>
+          </div>
+          <div class="feels-like">Feels Like: 23°C</div>
+          <div class="datetime">1:07:39 AM 3/17/2026</div>
+        </div>
+
+        <hr class="sidebar-divider" />
+
+        <div class="city-photo">
+          <span class="city-photo-label">City of Baybay</span>
+        </div>
+      </aside>
+
+      <!-- Right Panel -->
+      <main class="main-panel">
+        <header class="panel-header">
+          <h2 class="forecast-title"><b>City of Baybay Forecast</b></h2>
+          <div class="location-tag">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+              />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Weather in City of Baybay
+          </div>
+          <div class="theme-toggle">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              width="18"
+              height="18"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <div class="toggle-track"><div class="toggle-knob"></div></div>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              width="18"
+              height="18"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </div>
+        </header>
+
+        <!-- 5-day Forecast (matching screenshot) -->
+        <div class="forecast-row" style="grid-template-columns: repeat(5, 1fr)">
+          <div class="forecast-card active">
+            <div class="fc-day">Tue</div>
+            <div class="fc-temps">22° | 29°</div>
+          </div>
+          <div class="forecast-card">
+            <div class="fc-day">Wed</div>
+            <div class="fc-temps">23° | 28°</div>
+          </div>
+          <div class="forecast-card">
+            <div class="fc-day">Thu</div>
+            <div class="fc-temps">23° | 29°</div>
+          </div>
+          <div class="forecast-card">
+            <div class="fc-day">Fri</div>
+            <div class="fc-temps">23° | 29°</div>
+          </div>
+          <div class="forecast-card">
+            <div class="fc-day">Sat</div>
+            <div class="fc-temps">23° | 29°</div>
+          </div>
+        </div>
+
+        <!-- Weather Detail -->
+        <h3 class="detail-title"><b>Weather Detail</b></h3>
+
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="detail-label">Humidity</div>
+            <div class="detail-value large">86%</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Temperature Max | Min</div>
+            <div class="temp-maxmin">
+              <div class="temp-row-item">
+                <span class="arrow up">↑</span>
+                <span class="detail-value">22°C</span>
+              </div>
+              <div class="temp-row-item">
+                <span class="arrow down">↓</span>
+                <span class="detail-value">22°C</span>
+              </div>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Sunrise & Sunset</div>
+            <div class="sun-times">
+              <div class="sun-time-row">
+                <span class="detail-value">5:46:58 AM</span>
+                <span class="ampm">AM</span>
+              </div>
+              <div class="sun-time-row">
+                <span class="detail-value">5:51:27 PM</span>
+                <span class="ampm">PM</span>
+              </div>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Weather Description</div>
+            <div class="detail-value large">few clouds</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Pressure</div>
+            <div class="detail-value large">
+              1012 <span class="unit">hPa</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Wind Speed</div>
+            <div class="detail-value large">
+              2.07 <span class="unit">km/h</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
