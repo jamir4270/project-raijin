@@ -1,10 +1,20 @@
 const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 const UNSPLASH_BASE_URL = import.meta.env.VITE_UNSPLASH_BASE_URL;
+import { cacheService } from "./cache-service";
 
 export const getCityPhoto = async (city) => {
   if (!UNSPLASH_ACCESS_KEY || !UNSPLASH_BASE_URL) {
     console.error("Unsplash API credentials not configured");
     return null;
+  }
+
+  const cacheKey = `photo_${city.toLowerCase()}`;
+
+  // Check cache first
+  const cachedPhoto = cacheService.get(cacheKey);
+  if (cachedPhoto) {
+    console.log("Using cached photo for:", city);
+    return cachedPhoto;
   }
 
   try {
@@ -25,13 +35,21 @@ export const getCityPhoto = async (city) => {
     const data = await response.json();
 
     if (data.results && data.results.length > 0) {
-      return {
-        url: data.results[0].urls.regular,
-        photographer: data.results[0].user.name,
-        photographerLink:
-          data.results[0].user.portfolio_url || data.results[0].links.html,
-        unsplashLink: data.results[0].links.html,
+      const result = data.results[0];
+      // Use optimized image URL: specify width for responsive loading
+      // Unsplash URLs support width param for automatic optimization
+      const optimizedUrl = `${result.urls.raw}&w=400&q=75&fit=crop`;
+
+      const photo = {
+        url: optimizedUrl,
+        photographer: result.user.name,
+        photographerLink: result.user.portfolio_url || result.links.html,
+        unsplashLink: result.links.html,
       };
+
+      // Cache for 7 days (photos don't change often)
+      cacheService.set(cacheKey, photo, 7 * 24 * 60 * 60 * 1000);
+      return photo;
     }
 
     return null;
