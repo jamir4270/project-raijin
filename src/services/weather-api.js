@@ -1,5 +1,6 @@
 const API_KEY = import.meta.env.VITE_OPEN_WEATHER_MAP_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
+import { cacheService } from "./cache-service";
 
 /**
  * Fetch current weather data for a city
@@ -7,6 +8,15 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5";
  * @returns {Promise<object>} Weather data
  */
 export const getCurrentWeather = async (city) => {
+  const cacheKey = `weather_${city.toLowerCase()}`;
+
+  // Check cache first
+  const cachedData = cacheService.get(cacheKey);
+  if (cachedData) {
+    console.log("Using cached weather data for:", city);
+    return cachedData;
+  }
+
   try {
     const response = await fetch(
       `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`,
@@ -14,7 +24,11 @@ export const getCurrentWeather = async (city) => {
     if (!response.ok) {
       throw new Error(`Weather API error: ${response.statusText}`);
     }
-    return await response.json();
+    const data = await response.json();
+
+    // Cache for 30 minutes
+    cacheService.set(cacheKey, data, 30 * 60 * 1000);
+    return data;
   } catch (error) {
     console.error("Error fetching current weather:", error);
     throw error;
@@ -27,6 +41,15 @@ export const getCurrentWeather = async (city) => {
  * @returns {Promise<object>} Forecast data
  */
 export const getWeatherForecast = async (city) => {
+  const cacheKey = `forecast_${city.toLowerCase()}`;
+
+  // Check cache first
+  const cachedData = cacheService.get(cacheKey);
+  if (cachedData) {
+    console.log("Using cached forecast data for:", city);
+    return cachedData;
+  }
+
   try {
     const response = await fetch(
       `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`,
@@ -34,7 +57,11 @@ export const getWeatherForecast = async (city) => {
     if (!response.ok) {
       throw new Error(`Forecast API error: ${response.statusText}`);
     }
-    return await response.json();
+    const data = await response.json();
+
+    // Cache for 1 hour
+    cacheService.set(cacheKey, data, 60 * 60 * 1000);
+    return data;
   } catch (error) {
     console.error("Error fetching weather forecast:", error);
     throw error;
