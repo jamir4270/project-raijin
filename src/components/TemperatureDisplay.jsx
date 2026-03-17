@@ -7,11 +7,12 @@ export const TemperatureDisplay = ({
   main,
   description,
   location,
+  countryCode,
 }) => {
   return (
     <div className="current-info">
       <div className="city-name">
-        {location} <span className="country">PH</span>
+        {location} <span className="country">{countryCode || "XX"}</span>
       </div>
 
       <WeatherIcon description={main} size="large" />
