@@ -19,7 +19,7 @@ if (themeToggle && toggleTrack && toggleKnob) {
     setTheme(theme === "dark");
   });
 }
-const API_KEY = import.meta.env.OPEN_WEATHER_APP_API_KEY;
+const API_KEY = import.meta.env.VITE_OPEN_WEATHER_APP_API_KEY;
 
 // DOM Elements
 const searchInput = document.querySelector(".search-bar input");
