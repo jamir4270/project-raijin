@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Sidebar, MainPanel } from "./components";
+import { Sidebar, MainPanel, LoadingSpinner, ErrorAlert } from "./components";
 import { getCurrentWeather } from "./services/weather-api";
 import "./App.css";
 
@@ -19,8 +19,22 @@ function App() {
       const data = await getCurrentWeather(city);
       setWeatherData(data);
     } catch (err) {
-      setError(`Failed to fetch weather for ${city}`);
-      console.error(err);
+      console.error("Error fetching weather:", err);
+
+      // Differentiate between network errors and invalid city
+      let errorMessage = "Failed to fetch weather data";
+
+      if (err.message === "Failed to fetch" || !navigator.onLine) {
+        errorMessage =
+          "Network error. Please check your internet connection and try again.";
+      } else if (err.response?.status === 404 || err.message.includes("404")) {
+        errorMessage = `City "${city}" not found. Please check the spelling and try again.`;
+      } else if (err.message.includes("401") || err.message.includes("403")) {
+        errorMessage = "Invalid API key. Please contact support.";
+      }
+
+      setError(errorMessage);
+      setWeatherData(null);
     } finally {
       setLoading(false);
     }
@@ -39,6 +53,10 @@ function App() {
     document.body.classList.toggle("dark", !isDark);
   };
 
+  const handleDismissError = () => {
+    setError(null);
+  };
+
   return (
     <div className={`app-container ${isDark ? "dark" : ""}`}>
       <div className="app">
@@ -49,14 +67,21 @@ function App() {
           onSearch={handleSearch}
           isDark={isDark}
           onThemeToggle={handleThemeToggle}
+          isLoading={loading}
         />
-        <MainPanel
-          weatherData={weatherData}
-          isDark={isDark}
-          onThemeToggle={handleThemeToggle}
-        />
+        {loading ? (
+          <div className="main-panel">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <MainPanel
+            weatherData={weatherData}
+            isDark={isDark}
+            onThemeToggle={handleThemeToggle}
+          />
+        )}
       </div>
-      {error && <div className="error-message">{error}</div>}
+      {error && <ErrorAlert message={error} onDismiss={handleDismissError} />}
     </div>
   );
 }
