@@ -1,7 +1,12 @@
-const UNSPLASH_ACCESS_KEY = "zQKnuYuOWiygVy-R_CCy8nJS-nHaEY0F-G3t0tqlecg";
-const UNSPLASH_BASE_URL = "https://api.unsplash.com";
+const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+const UNSPLASH_BASE_URL = import.meta.env.VITE_UNSPLASH_BASE_URL;
 
 export const getCityPhoto = async (city) => {
+  if (!UNSPLASH_ACCESS_KEY || !UNSPLASH_BASE_URL) {
+    console.error("Unsplash API credentials not configured");
+    return null;
+  }
+
   try {
     const response = await fetch(
       `${UNSPLASH_BASE_URL}/search/photos?query=${encodeURIComponent(city)}&client_id=${UNSPLASH_ACCESS_KEY}&per_page=1&orientation=portrait`,
