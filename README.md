@@ -232,6 +232,8 @@ The app gracefully handles various error scenarios:
 Created as a midterm capstone project for Platform Based Development subject.
 
 **Team Members:**
+
+- jamir4270
 - Meljiee
 - mteraaa
 - ClydeZzz16
