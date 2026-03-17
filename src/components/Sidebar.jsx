@@ -26,6 +26,10 @@ export const Sidebar = ({
   }, [weatherData?.name]);
   return (
     <aside className="sidebar">
+      <div className="sidebar-header">
+        <h1 className="app-title">Nimbus</h1>
+        <p className="app-subtitle">Weather at a Glance</p>
+      </div>
       <SearchInput
         value={searchValue}
         onChange={onSearchChange}

@@ -13,6 +13,14 @@ body.dark {
   border-right: 1px solid #23263a;
 }
 
+.dark .app-title {
+  color: #fff;
+}
+
+.dark .app-subtitle {
+  color: #aaa;
+}
+
 .dark .search-bar input {
   background: #23263a;
   color: #eee;
@@ -126,6 +134,27 @@ body.dark {
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+.sidebar-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1c1f2e;
+  letter-spacing: -0.5px;
+}
+
+.app-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .search-bar {
