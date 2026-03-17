@@ -229,7 +229,13 @@ The app gracefully handles various error scenarios:
 
 ## Development Team
 
-Created as a capstone project for Platform Based Development subject.
+Created as a midterm capstone project for Platform Based Development subject.
+
+**Team Members:**
+- Meljiee
+- mteraaa
+- ClydeZzz16
+- AndreiCatigan
 
 ## License
 
