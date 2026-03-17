@@ -1,6 +1,6 @@
-# React + Vite
+# Nimbus - Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful, responsive weather application built with React and Vite. Get real-time weather data and stunning city photos from around the world.
 
 Currently, two official plugins are available:
 
