@@ -44,8 +44,8 @@ function App() {
     fetchWeather("Baybay");
   }, []);
 
-  const handleSearch = () => {
-    fetchWeather(searchValue);
+  const handleSearch = (city) => {
+    fetchWeather(city || searchValue);
   };
 
   const handleThemeToggle = () => {

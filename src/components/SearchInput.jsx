@@ -62,6 +62,7 @@ export const SearchInput = ({ value, onChange, onSearch, isLoading }) => {
     onChange(cityName);
     setShowSuggestions(false);
     setValidationError("");
+    onSearch(cityName);
   };
 
   return (
