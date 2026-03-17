@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { SearchInput } from "./SearchInput";
 import { TemperatureDisplay } from "./TemperatureDisplay";
 
@@ -9,6 +9,7 @@ export const Sidebar = ({
   onSearch,
   isDark,
   onThemeToggle,
+  isLoading,
 }) => {
   return (
     <aside className="sidebar">
@@ -16,6 +17,7 @@ export const Sidebar = ({
         value={searchValue}
         onChange={onSearchChange}
         onSearch={onSearch}
+        isLoading={isLoading}
       />
 
       {weatherData && (
@@ -26,6 +28,7 @@ export const Sidebar = ({
             main={weatherData.weather[0].main}
             description={weatherData.weather[0].description}
             location={weatherData.name}
+            countryCode={weatherData.sys?.country}
           />
 
           <hr className="sidebar-divider" />
